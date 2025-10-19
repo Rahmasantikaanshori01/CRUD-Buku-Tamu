@@ -11,7 +11,7 @@ function query($query) {
     return $rows;
 }
 
-// tambah data
+// tambah data tamu
 function tambah_tamu($data)
 {
     global $koneksi;
@@ -30,7 +30,7 @@ function tambah_tamu($data)
     return mysqli_affected_rows($koneksi);
 }
 
-// ubah data
+// ubah data tamu
 function ubah_tamu($data)
 {
     global $koneksi;
@@ -56,11 +56,27 @@ $query = "UPDATE buku_tamuu SET
     return mysqli_affected_rows($koneksi);
 }
 
-// hapus data
+// hapus data tamu
 function hapus_tamu($id) {
     global $koneksi;
     $query = "DELETE FROM buku_tamuu WHERE id_tamu = '$id'";
     mysqli_query($koneksi, $query);
     return mysqli_affected_rows($koneksi);
 }
+
+// tambah data user
+function tambah_user($data){
+    global $koneksi;
+
+    $kode           = htmlspecialchars($data["id_user"]);
+    $username       = htmlspecialchars($data["username"]);
+    $password       = htmlspecialchars($data["password"]);
+    $user_role      = htmlspecialchars($data["user_role"]);
+
+
+    $password_hash = password_hash($password,PASSWORD_DEFAULT);
+    $query = "INSERT INTO users VALUES ('$kode', '$username', '$password_hash', '$user_role')";
+    mysqli_query($koneksi, $query);
+    return mysqli_affected_rows($koneksi);
+}   
 ?>
