@@ -55,4 +55,12 @@ $query = "UPDATE buku_tamuu SET
 
     return mysqli_affected_rows($koneksi);
 }
+
+// hapus data
+function hapus_tamu($id) {
+    global $koneksi;
+    $query = "DELETE FROM buku_tamuu WHERE id_tamu = '$id'";
+    mysqli_query($koneksi, $query);
+    return mysqli_affected_rows($koneksi);
+}
 ?>
