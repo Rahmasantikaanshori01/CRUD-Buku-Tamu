@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Cek apakah user sudah login, jika belum redirect ke login
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +82,16 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
+             <!-- Logout -->
+            <?php if (isset($_SESSION['login'])): ?>
+                <li class="nav-item">
+                    <a href="logout.php" class="nav-link">
+                        <i class="fas fa-fw fa-power-off"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -143,7 +163,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
