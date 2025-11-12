@@ -50,7 +50,7 @@
     <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="assets/js/sb-admin-2.min.js"></script>
 
      <!-- Page level plugins -->
     <script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
@@ -67,6 +67,27 @@
                 });
             }, 4000);
         });
+    </script>
+
+    <script>
+    // auto hide notifikasi
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 4000);
+    });
+
+    // ambil data id user dari tombol ganti password ke modal ganti password
+    $(document).ready(function () {
+    $('#gantiPassword').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var modal = $(this)
+        modal.find('.modal-body #id_user').val(id)
+    });
+});
     </script>
 
 </body>

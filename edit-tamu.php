@@ -13,7 +13,7 @@ include_once('templates/header.php');
 // jika ada parameter id di URL
 if (isset($_GET['id'])) {
     $id_tamu = mysqli_real_escape_string($koneksi, $_GET['id']);
-    $result = mysqli_query($koneksi, "SELECT * FROM buku_tamuu WHERE id_tamu = '$id_tamu'");
+    $result = mysqli_query($koneksi, "SELECT * FROM buku_tamu WHERE id_tamu = '$id_tamu'");
     $data = mysqli_fetch_assoc($result);
   }
 ?>

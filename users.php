@@ -25,12 +25,29 @@ if(isset($_POST['simpan'])) {
 <?php
     }
 }
+
+// Ganti password
+if (isset($_POST['ganti_password'])) {
+    if (ganti_password($_POST) > 0) {
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+                Password berhasil diubah!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                  <span aria-hidden='true'>&times;</span>
+                </button>
+              </div>";
+    } else {
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+                Password gagal diubah!
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                  <span aria-hidden='true'>&times;</span>
+                </button>
+              </div>";
+    }
+}
 ?>
 
 </div>
 <!-- /.container-fluid -->
-
-
 
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
@@ -62,7 +79,12 @@ if(isset($_POST['simpan'])) {
                         <td><?= $no++; ?></td>
                         <td><?= $user['username']; ?></td>
                         <td><?= $user['user_role']; ?></td>
-                        <td style="display: inline-flex; gap: 5px;">
+                        <td class="text-cente">
+                            <!-- Button trigger modal -->
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#gantiPassword" data-id="<?= $user['id_user'] ?>">
+  Ganti Password
+</button>
+
                             <a class="btn btn-success" href="edit-user.php?id=<?= $user['id_user']?>">Ubah</a>
                             <a onclick="confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger" href="hapus-user.php?id=<?= $user['id_user'] ?>">Hapus</a>
                         </td>
@@ -73,6 +95,7 @@ if(isset($_POST['simpan'])) {
         </div>
     </div>
 </div>
+
 
 <?php
 $query = mysqli_query($koneksi, "SELECT max(id_user) as kodeTerbesar FROM users");
@@ -86,6 +109,40 @@ $urutan++;
 $huruf = "usr";
 $KodeUser = $huruf . sprintf("%02s", $urutan);
 ?>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="gantiPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ganti Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="">
+                    <input type="hidden" name="id_user" id="id_user">
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-4 col-form-label">Password Baru</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                <button type="submit" name="ganti_password" class="btn btn-primary">Simpan</button>
+            </div>
+                </form>
+
+    </div>
+  </div>
+</div>
+
+
 
 <!-- Modal User -->
 <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">

@@ -60,7 +60,7 @@ if(isset($_POST['simpan'])) {
                 <tbody>
                     <?php
                     $no = 1;
-                    $buku_tamuu = query("SELECT * FROM buku_tamuu");
+                    $buku_tamuu = query("SELECT * FROM buku_tamu");
                     foreach($buku_tamuu as $tamu) : ?>
                     <tr>
                         <td><?= $no++; ?></td>
@@ -95,7 +95,7 @@ if(isset($_POST['simpan'])) {
 </div>
 
 <?php
-$query = mysqli_query($koneksi, "SELECT max(id_tamu) as kodeTerbesar FROM buku_tamuu");
+$query = mysqli_query($koneksi, "SELECT max(id_tamu) as kodeTerbesar FROM buku_tamu");
 $data = mysqli_fetch_array($query);
 $KodeTamu = $data['kodeTerbesar'];
 

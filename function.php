@@ -24,7 +24,7 @@ function tambah_tamu($data)
     $bertemu        = htmlspecialchars($data['bertemu']);
     $kepentingan    = htmlspecialchars($data['kepentingan']);
 
-    $query = "INSERT INTO buku_tamuu VALUES ('$kode', '$tanggal', '$nama_tamu', '$alamat', '$no_hp', '$bertemu', '$kepentingan')";
+    $query = "INSERT INTO buku_tamu VALUES ('$kode', '$tanggal', '$nama_tamu', '$alamat', '$no_hp', '$bertemu', '$kepentingan')";
 
     mysqli_query($koneksi, $query);
     return mysqli_affected_rows($koneksi);
@@ -43,7 +43,7 @@ function ubah_tamu($data)
     $kepentingan    = htmlspecialchars($data["kepentingan"]);
 
 
-$query = "UPDATE buku_tamuu SET
+$query = "UPDATE buku_tamu SET
           nama_tamu     = '$nama_tamu',
           alamat        = '$alamat',
           no_hp         = '$no_hp',
@@ -59,7 +59,7 @@ $query = "UPDATE buku_tamuu SET
 // hapus data tamu
 function hapus_tamu($id) {
     global $koneksi;
-    $query = "DELETE FROM buku_tamuu WHERE id_tamu = '$id'";
+    $query = "DELETE FROM buku_tamu WHERE id_tamu = '$id'";
     mysqli_query($koneksi, $query);
     return mysqli_affected_rows($koneksi);
 }
@@ -102,6 +102,22 @@ function ubah_user($data)
 function hapus_user($id) {
     global $koneksi;
     $query = "DELETE FROM users WHERE id_user = '$id'";
+    mysqli_query($koneksi, $query);
+    return mysqli_affected_rows($koneksi);
+}
+
+// ganti password user
+function ganti_password($data) {
+    global $koneksi;
+
+    $kode               = htmlspecialchars($data["id_user"]);
+    $password           = htmlspecialchars($data["password"]);
+    $password_hash      = password_hash($password,PASSWORD_DEFAULT);
+
+    $query = "UPDATE users SET
+              password      = '$password_hash'
+              WHERE id_user = '$kode'";
+
     mysqli_query($koneksi, $query);
     return mysqli_affected_rows($koneksi);
 }
