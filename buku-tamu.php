@@ -1,7 +1,27 @@
 <?php
 require_once('function.php');
 include_once('templates/header.php');
+
+// pengecekan user role bukan operator maka tidak boleh mengakses halaman
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'operator') {
+    echo "<script>
+            alert('Anda tidak memiliki akses ke halaman ini!');
+            window.location.href = 'index.php';
+          </script>";
+    exit;
+}
+
+// cek apabila ada user login dan user role nya adalah operator maka tampilkan buku-tamu
+if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') :
 ?>
+    <li class="nav-item">
+        <a class="nav-link" href="users.php">
+            <li class="fas fa-fw fa-users"></li>
+            <span>User</span>
+        </a>
+    </li>
+
+<?php endif; ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">

@@ -20,13 +20,13 @@ if(isset($_POST['login'])) {
         // cek apakah password benar
         $row = mysqli_fetch_assoc($result);
          if(password_verify($password, $row['password'])) {
-            $_SESSION['login'] = true;
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['role'] = $row['user_role']; // role: admin / operator
-            // login berhasil
-            header("location: index.php");
-            exit;
-         }
+    $_SESSION['login'] = true;
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['role'] = $row['user_role']; // kolom yang benar
+    header("location: index.php");
+    exit;
+}
+
     }
     $error = true;
 }
@@ -43,7 +43,7 @@ if(isset($_POST['login'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -110,6 +110,9 @@ if(isset($_POST['login'])) {
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="register.html">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
